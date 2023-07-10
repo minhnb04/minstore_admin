@@ -1,0 +1,15 @@
+Account Management: quản lý tài khoản
+- role: manager, staff
+Product Management: quản lý sản phẩm
+- mobiles, tablets, accessories
+- nhập thêm hàng
+Orders: quản lý đơn đặt hàng
+- tạo đơn hàng
+- xác nhận đơn hàng
+- xác nhận thanh toán
+Sales: doanh thu bán hàng
+- thống kê doanh thu bán hàng của tứng mặt hàng
+
+mongodb+srv://minhnb04:byUia9oS3jND8tvX@cluster0.ltuhtop.mongodb.net/minstore
+
+    var usersData = <%- JSON.stringify(lsUser) %>

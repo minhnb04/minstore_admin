@@ -1,0 +1,227 @@
+<div class="row min-vh-100">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header pb-0 d-flex justify-content-between">
+                <h6>Users table</h6>
+                <a class="btn btn-link text-success px-3 mb-0" onclick="show_form_add_user()" href="javascript:;"><i
+                        class="fas fa-plus text-success me-2" aria-hidden="true"></i>Add</a>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+                <div class="table-responsive p-0">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Stt</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Name /
+                                    User
+                                </th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    Role</th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Status</th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Birdthday</th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <% lsUser.forEach(function(user,i){ %>
+                                <%- include('users-item', {user: user, i: i}); %>
+                                    <% }); %>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal confirm delete -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete user</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Do you want to delete this user?
+            </div>
+            <div class="modal-footer">
+                <button id="btn_cf_delete_user" type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete -->
+<form id="delete_user_form" method="POST"></form>
+
+
+<!-- Modal update -->
+<div class="modal fade" id="updateUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="update_user_form" method="POST" enctype="multipart/form-data">
+
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Employee Code</label>
+                        <input type="text" name="employeeCode" class="form-control" id="currentUser_employee_code">
+                    </div>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Fullname</label>
+                        <input type="text" name="fullname" class="form-control" id="currentUser_fullname">
+                    </div>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Username</label>
+                        <input type="text" name="username" class="form-control" id="currentUser_username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Password</label>
+                        <input name="password" id="currentUser_password" type="password" class="form-control" readonly
+                            placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                    </div>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Phone</label>
+                        <input type="text" name="phoneNumber" class="form-control" id="currentUser_phoneNumber">
+                    </div>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Email</label>
+                        <input type="email" name="email" class="form-control" id="currentUser_email">
+                    </div>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Gender</label>
+                            <select name="gender" id="currentUser_gender" class="form-select pe-5"
+                                aria-label="Default select example">
+                                <option selected>Select gender</option>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                                <option value="3">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Birthday</label>
+                            <input name="birthday" id="currentUser_birthday" type="date" class="form-control" placeholder="Birthday"
+                                aria-label="Birthday" aria-describedby="birthday-addon">
+                        </div>
+                    </div>
+
+                    <div>
+<!--                        <div class="d-flex justify-content-center mb-4">-->
+<!--                            <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"-->
+<!--                                 class="rounded-circle" alt="example placeholder" style="width: 200px;" />-->
+<!--                        </div>-->
+                        <div class="d-flex justify-content-center">
+                            <div class="btn btn-primary btn-rounded bg-gradient-dark">
+                                <label class="form-label text-white m-1" for="customFile2">Choose avatar</label>
+                                <input name="avatarImage" type="file" class="form-control" id="customFile2" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input name="status" class="form-check-input" type="checkbox" id="ckb_status_active" value="true">
+                            <label class="form-check-label mt-1" for="inlineCheckbox1">Active</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input name="status" class="form-check-input" type="checkbox" id="ckb_status_disable" value="false">
+                            <label class="form-check-label mt-1" for="inlineCheckbox2">Disable</label>
+                          </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_cf_update_user" type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    //Lấy danh sách user từ server
+    var usersData = <%- JSON.stringify(lsUser) %>
+    console.log(usersData);
+
+    var deleteUserModal = document.getElementById('deleteUserModal')
+    var btn_cf_delete_user = document.getElementById('btn_cf_delete_user')
+    var delete_user_form = document.getElementById('delete_user_form')
+
+    var updateUserModal = document.getElementById('updateUserModal')
+    var btn_cf_update_user = document.getElementById('btn_cf_update_user')
+    var update_user_form = document.getElementById('update_user_form')
+
+    var userId;
+    var currentUser;
+
+    deleteUserModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        userId = button.getAttribute('data-id')
+        console.log(userId);
+    })
+
+    btn_cf_delete_user.onclick = function () {
+        delete_user_form.action = '/users/delete/'+ userId+'?_method=DELETE'
+        delete_user_form.submit()
+    }
+
+    updateUserModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        userId = button.getAttribute('data-id')
+        currentUser = usersData.find((user)=> user._id == userId)
+        
+        document.getElementById('currentUser_employee_code').value = currentUser.employeeCode
+        document.getElementById('currentUser_fullname').value = currentUser.fullname
+        document.getElementById('currentUser_username').value = currentUser.username
+        document.getElementById('currentUser_password').value = currentUser.password
+        document.getElementById('currentUser_phoneNumber').value = currentUser.phoneNumber
+        document.getElementById('currentUser_email').value = currentUser.email
+        document.getElementById('currentUser_gender').value = currentUser.gender
+        var formatStringDate = currentUser.birthday.slice(6, 10) + '-' + currentUser.birthday.slice(3, 5) + '-' + currentUser.birthday.slice(0, 2)
+        document.getElementById('currentUser_birthday').value = formatStringDate
+
+        if (currentUser.status == true) {
+            document.getElementById('ckb_status_active').checked = true
+            document.getElementById('ckb_status_disable').checked = false
+
+        } else {
+            document.getElementById('ckb_status_active').checked = false
+            document.getElementById('ckb_status_disable').checked = true
+        }
+
+    })
+
+    document.getElementById('ckb_status_active').onclick = function(){
+        document.getElementById('ckb_status_disable').checked = false
+
+    }
+
+    document.getElementById('ckb_status_disable').onclick = function(){
+        document.getElementById('ckb_status_active').checked = false
+
+    }
+
+    btn_cf_update_user.onclick = function(){
+        update_user_form.action = '/users/update/'+ userId+'?_method=PUT'
+        update_user_form.submit()
+    }
+
+
+</script>

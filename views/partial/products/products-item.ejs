@@ -1,0 +1,48 @@
+<tr>
+    <td class="align-middle text-center">
+        <p class="text-xs font-weight-bold mb-0"><%= i+1 %></p>
+    </td>
+    <td>
+        <div class="d-flex px-2 py-1">
+            <div>
+                <img src="/productImage/<%= product.productImages[0] %>" class="avatar avatar-sm me-3" alt="user1">
+            </div>
+            <div class="d-flex flex-column justify-content-center">
+                <h6 class="mb-0 text-sm"><%= product.productName %></h6>
+                <p class="text-xs text-secondary mb-0"><%= product.color %></p>
+            </div>
+        </div>
+    </td>
+    <td class="align-middle text-center">
+        <div>
+            <img src="/productImage/<%= product.productImages[0] %>" class="avatar avatar-sm" alt="user1">
+        </div>
+    </td>
+    <td>
+        <p class="text-xs font-weight-bold mb-0"><%= product.brand%></p>
+        <p class="text-xs text-secondary mb-0"><%= product.classify%></p>
+    </td>
+    <td class="text-center">
+        <p class="text-xs font-weight-bold mb-0"><%= product.quantity%></p>
+    </td>
+    <td class="align-middle text-center text-sm">
+        <% if(product.status==true){ %>
+                <span class="badge badge-sm bg-gradient-success">On</span>
+        <% }else{ %>
+                <span class="badge badge-sm bg-gradient-secondary">Off</span>
+        <% } %>
+    </td>
+
+    <td class="align-middle text-center">
+        <span class="text-secondary text-xs font-weight-bold"><%= product.lastUpdated%></span>
+    </td>
+    <td class="align-middle text-center">
+        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-id="<%= product._id %>" data-bs-toggle="modal" data-bs-target="#updateProductModal">
+            Edit
+        </a>
+        &#160
+        <a href="javascript:;" class="text-secondary font-weight-bold text-xs text-danger" data-id="<%= product._id %>" data-bs-toggle="modal" data-bs-target="#deleteProductModal">
+            Delete
+        </a>
+    </td>
+</tr>

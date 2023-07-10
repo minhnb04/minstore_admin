@@ -1,0 +1,232 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header pb-0 d-flex justify-content-between">
+                <h6>Product table</h6>
+                <a class="btn btn-link text-success px-3 mb-0" onclick="show_form_add_product()" href="javascript:;"><i class="fas fa-plus text-success me-2" aria-hidden="true"></i>Add</a>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+                <div class="table-responsive p-0">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                        <tr>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-2">Stt</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Images</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Brand</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Quantity</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Time</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <% lsProduct.forEach(function(product,i){ %>
+                            <%- include('products-item', {product: product, i: i}); %>
+                        <% }); %>
+                        
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal delete product -->
+<div class="modal fade" id="deleteProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Do you want to delete this product?
+            </div>
+            <div class="modal-footer">
+                <button id="btn_cf_delete_product" type="button" class="btn btn-primary bg-danger">Delete</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete -->
+<form id="delete_product_form" method="POST"></form>
+
+<!-- Modal update product -->
+<div class="modal fade" id="updateProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Update product</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                    <form id="update_product_form" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <input type="text" name="productName" id="productNameUpdate" class="form-control" placeholder="Product name" aria-label="Product name" aria-describedby="productname-addon">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="brand" id="brandUpdate" class="form-control" placeholder="Brand" aria-label="Brand" aria-describedby="brand-addon">
+                        </div>
+
+                        <div class="mb-3 d-flex justify-content-between">
+                            <select name="classify" id="classifyUpdate" class="form-select pe-5" aria-label="Default select example">
+                                <option selected>Classify</option>
+                                <option value="Mobile">Mobile</option>
+                                <option value="Tablet">Tablet</option>
+                                <option value="Accessory">Accessory</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="text" name="specifications" id="specificationsUpdate" class="form-control" placeholder="Specifications" aria-label="Specifications" aria-describedby="specifications-addon">
+                        </div>
+
+                        <div class="mb-3 d-flex justify-content-between">
+                            <select name="color" id="colorUpdate" class="form-select w-30 pe-5" aria-label="Default select example">
+                                <option selected>Select color</option>
+                                <option value="white">white</option>
+                                <option value="black">black</option>
+                                <option value="gold">gold</option>
+                                <option value="silver">silver</option>
+                                <option value="gray">gray</option>
+                                <option value="blue">blue</option>
+                            </select>
+                            <select name="memory" id="memoryUpdate" class="form-select w-30 pe-5" aria-label="Default select example">
+                                <option selected>Select memory</option>
+                                <option value="64">64GB</option>
+                                <option value="128">128GB</option>
+                                <option value="256">256GB</option>
+                                <option value="512">512GB</option>
+                                <option value="1024">1TB</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3 d-flex justify-content-between">
+                            <div class="mb-3 w-30">
+                                <input name="quantity" id="quantityUpdate" type="number" class="form-control" placeholder="Quantity" aria-label="Quantity" aria-describedby="quantity-addon">
+                            </div>
+                            <div class="mb-3 w-30">
+                                <input name="lastUpdated" id="lastUpdatedUpdate" type="date" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <input name="price" id="priceUpdate" type="number" class="form-control" placeholder="Price (VNĐ)" aria-label="Price" aria-describedby="Price-addon">
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                            <div class="btn btn-primary btn-rounded bg-gradient-dark">
+                                <label class="form-label text-white m-1" for="customFile1">Choose image</label>
+                                <input name="productImages" type="file" class="form-control" id="customFile1" multiple/>
+                            </div>
+                        </div>
+
+                        <div role="group">
+                            <div class="form-check form-check-inline">
+                                <input name="status" class="form-check-input" type="checkbox" id="ckb_status_active" value="true">
+                                <label class="form-check-label mt-1" for="inlineCheckbox1">Active</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input name="status" class="form-check-input" type="checkbox" id="ckb_status_disable" value="false">
+                                <label class="form-check-label mt-1" for="inlineCheckbox2">Disable</label>
+                            </div>
+                        </div>
+                    </form>
+
+                <div class="modal-footer d-flex justify-content-around">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="btn_cf_update_product" type="button" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    //Lấy danh sách product từ server
+    var productsData = <%- JSON.stringify(lsProduct) %>
+    console.log(productsData);
+
+    var deleteProductModal = document.getElementById('deleteProductModal')
+    var btn_cf_delete_product = document.getElementById('btn_cf_delete_product')
+    var delete_product_form = document.getElementById('delete_product_form')
+
+    var updateProductModal = document.getElementById('updateProductModal')
+    var btn_cf_update_product = document.getElementById('btn_cf_update_product')
+    var update_product_form = document.getElementById('update_product_form')
+
+    var productId;
+    var currentProduct;
+
+    deleteProductModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        productId = button.getAttribute('data-id')
+        console.log(productId)
+    })
+
+    btn_cf_delete_product.onclick = function (){
+        delete_product_form.action = '/products/delete/'+ productId+'?_method=DELETE'
+        delete_product_form.submit()
+    }
+
+    updateProductModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        productId = button.getAttribute('data-id')
+        currentProduct = productsData.find((product)=> product._id == productId)
+
+        document.getElementById('productNameUpdate').value = currentProduct.productName
+        document.getElementById('brandUpdate').value = currentProduct.brand
+        document.getElementById('classifyUpdate').value = currentProduct.classify
+        document.getElementById('specificationsUpdate').value = currentProduct.specifications
+        document.getElementById('colorUpdate').value = currentProduct.color
+        document.getElementById('memoryUpdate').value = currentProduct.memory
+        document.getElementById('quantityUpdate').value = currentProduct.quantity
+        document.getElementById('priceUpdate').value = currentProduct.price
+
+        const today = new Date()
+        const year = today.getFullYear()
+        const month = String(today.getMonth()+1).padStart(2,'0')
+        const day = String(today.getDay()).padStart(2,'0')
+
+
+        console.log(`${year}-${month}-${day}`)
+
+        document.getElementById('lastUpdatedUpdate').value = `${year}-${month}-${day}`;
+
+        if (currentProduct.status == true) {
+            document.getElementById('ckb_status_active').checked = true
+            document.getElementById('ckb_status_disable').checked = false
+
+        } else {
+            document.getElementById('ckb_status_active').checked = false
+            document.getElementById('ckb_status_disable').checked = true
+        }
+
+    })
+
+    document.getElementById('ckb_status_active').onclick = function(){
+        document.getElementById('ckb_status_disable').checked = false
+
+    }
+
+    document.getElementById('ckb_status_disable').onclick = function(){
+        document.getElementById('ckb_status_active').checked = false
+
+    }
+
+    btn_cf_update_product.onclick = function(){
+        update_product_form.action = '/products/update/'+productId+'?_method=PUT'
+        update_product_form.submit()
+    }
+
+
+</script>
