@@ -28,6 +28,9 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'uploads')));
 
+//logger with morgan
+app.use(logger('dev'));
+
 //ghi đè phương thức
 app.use(methodOverride('_method'))
 
