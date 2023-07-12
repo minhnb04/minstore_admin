@@ -25,6 +25,10 @@ router.delete('/delete/:id', productController.deleteProduct);
 
 router.get('/search', productController.searchProduct);
 
+//api trả về ProductsJSON
+router.get('/getProducts', productController.getProducts);
+
+
 module.exports = router;
 
 
