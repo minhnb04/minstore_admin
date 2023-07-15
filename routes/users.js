@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const multer = require('multer');
 
+const indexController = require('../config/controllers/indexController')
 const userController = require('../config/controllers/userController') 
 
 var storage = multer.diskStorage({
