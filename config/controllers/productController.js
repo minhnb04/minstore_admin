@@ -5,7 +5,7 @@ const fs = require('fs');
 class ProductController {
 
     async index(req, res){
-        const userlogin = res.userlogin
+        const userlogin = req.userlogin
         await Product.find()
             .then((products) => {
                 var lsProduct = products.map(function (product) {
@@ -147,7 +147,7 @@ class ProductController {
     }
 
     searchProduct(req, res, next) {
-        const userlogin = res.userlogin
+        const userlogin = req.userlogin
         var keyword_search = req.query.keyword_search
         var keyword_search_number;
         if (isNaN(keyword_search) == false){

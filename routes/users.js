@@ -18,13 +18,13 @@ var upload = multer({storage:storage});
 
 router.get('/', userController.index);
 
-router.post('/add-user',upload.single('avatarImage'),userController.addUser);
+router.post('/add-user',authController.checkPermissionManager, upload.single('avatarImage'),userController.addUser);
 
-router.put('/update/:id',upload.single('avatarImage'), userController.updateUser);
+router.put('/update/:id',authController.checkPermissionManager, upload.single('avatarImage'), userController.updateUser);
 
-router.delete('/delete/:id', userController.deleteUser);
+router.delete('/delete/:id',authController.checkPermissionManager, userController.deleteUser);
 
-router.get('/search', userController.searchUser);
+router.get('/search',authController.checkPermissionStaff, userController.searchUser);
 
 
 module.exports = router;

@@ -2,7 +2,7 @@
 class IndexController {
 
     index(req, res){
-        const userlogin = res.userlogin
+        const userlogin = req.userlogin
         console.log("userlogin: ",userlogin);
         var token = req.cookies.token
         if(token){

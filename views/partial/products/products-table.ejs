@@ -198,11 +198,9 @@
         const today = new Date()
         const year = today.getFullYear()
         const month = String(today.getMonth()+1).padStart(2,'0')
-        const day = String(today.getDay()).padStart(2,'0')
+        const day = String(today.getDate()).padStart(2,'0')
 
-
-        console.log(`${year}-${month}-${day}`)
-
+        // console.log(`${year}-${month}-${day}`)
         document.getElementById('lastUpdatedUpdate').value = `${year}-${month}-${day}`;
 
         if (currentProduct.status == true) {
@@ -213,7 +211,6 @@
             document.getElementById('ckb_status_active').checked = false
             document.getElementById('ckb_status_disable').checked = true
         }
-
     })
 
     document.getElementById('ckb_status_active').onclick = function(){

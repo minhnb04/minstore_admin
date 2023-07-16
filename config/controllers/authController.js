@@ -51,26 +51,56 @@ class AuthController {
         try {
             var token = req.cookies.token
             var result = jwt.verify(token, secretKey)
-
-            console.log(result);
-            
+            res.secretKey = secretKey
             await User.findOne({_id:result._id})
             .then((user)=>{
-                res.userlogin = user
+                req.userlogin = user
+                next()
             })
             .catch((error)=>{
                 console.log(error);
             })
 
-            console.log("res.data: ",res.data);
-
-            if (result) {
-                next()
-            }
         } catch (error) {
             res.render('login', { title: 'LogIn' })
         }
  
+    }
+
+    checkPermissionManager(req, res, next){
+        const role = req.userlogin.role
+        console.log(role)
+        if(role === 1){
+            next()
+            req.role == role
+        }else{
+            console.log('You not permission !!!');
+            res.redirect(req.headers.referer)
+        }
+    }
+
+    checkPermissionStaff(req, res, next){
+        const role = req.userlogin.role
+        console.log(role)
+        if(role === 1 || role === 2){
+            next()
+            req.role == role
+        }else{
+            console.log('You not permission !!!');
+            res.redirect(req.headers.referer)
+        }
+    }
+
+    checkPermissionMember(req, res, next){
+        const role = req.userlogin.role
+        console.log(role)
+        if(role === 1 || role === 2 || role === 3){
+            next()
+            req.role == role
+        }else{
+            console.log('You not permission !!!');
+            res.redirect(req.headers.referer)
+        }
     }
 
     loginSuccessfully(req, res, next) {

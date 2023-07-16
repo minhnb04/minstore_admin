@@ -5,7 +5,7 @@ const fs = require('fs');
 class UserController {
 
     async index(req, res, next) {
-        const userlogin = res.userlogin
+        const userlogin = req.userlogin
         await User.find()
             .then((users) => {
                 var lsUser = users.map(function (user) {
@@ -133,7 +133,7 @@ class UserController {
     }
 
     searchUser(req, res, next) {
-        var userlogin = res.userlogin
+        var userlogin = req.userlogin
         var keyword_search = req.query.keyword_search
         var query = User.where({
             $or:[
