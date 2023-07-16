@@ -5,6 +5,7 @@ const fs = require('fs');
 class UserController {
 
     async index(req, res, next) {
+        const userlogin = res.userlogin
         await User.find()
             .then((users) => {
                 var lsUser = users.map(function (user) {
@@ -26,7 +27,7 @@ class UserController {
                     }
                 })
                 var usersJSON = JSON.stringify(lsUser)
-                res.render('users', { title: 'User Management', lsUser: lsUser, usersJSON: usersJSON})
+                res.render('users', { title: 'User Management',userlogin, lsUser, usersJSON})
             })
             .catch((error) => {
                 next(error)
@@ -132,6 +133,7 @@ class UserController {
     }
 
     searchUser(req, res, next) {
+        var userlogin = res.userlogin
         var keyword_search = req.query.keyword_search
         var query = User.where({
             $or:[
@@ -164,7 +166,7 @@ class UserController {
                 }
             })
             var usersJSON = JSON.stringify(lsUser)
-            res.render('users', { title: 'User Management', lsUser: lsUser, usersJSON: usersJSON})
+            res.render('users', { title: 'User Management',userlogin, lsUser, usersJSON})
         })
         .catch((error)=>{
             next(error)

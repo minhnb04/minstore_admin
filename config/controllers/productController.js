@@ -5,6 +5,7 @@ const fs = require('fs');
 class ProductController {
 
     async index(req, res){
+        const userlogin = res.userlogin
         await Product.find()
             .then((products) => {
                 var lsProduct = products.map(function (product) {
@@ -27,7 +28,7 @@ class ProductController {
                 })
                 console.log(lsProduct)
                 var productsJSON = JSON.stringify(lsProduct)
-                res.render('products', { title: 'Products Management', lsProduct: lsProduct, productsJSON: productsJSON})
+                res.render('products', { title: 'Products Management',userlogin, lsProduct, productsJSON})
             })
             .catch((error) => {
                 next(error)
@@ -146,6 +147,7 @@ class ProductController {
     }
 
     searchProduct(req, res, next) {
+        const userlogin = res.userlogin
         var keyword_search = req.query.keyword_search
         var keyword_search_number;
         if (isNaN(keyword_search) == false){
@@ -186,7 +188,7 @@ class ProductController {
                 })
                 console.log(lsProduct)
                 var productsJSON = JSON.stringify(lsProduct)
-                res.render('products', { title: 'Products Management', lsProduct: lsProduct, productsJSON: productsJSON})
+                res.render('products', { title: 'Products Management',userlogin, lsProduct, productsJSON})
             })
             .catch((error)=>{
                 next(error)

@@ -21,8 +21,11 @@
 
                 <li class="nav-item d-flex align-items-center">
                     <a href="/login" class="nav-link text-body font-weight-bold px-0">
-                        <i class="fa fa-user me-sm-1"></i>
-                        <span class="d-sm-inline d-none">Login</span>
+                        <!-- <i class="fa fa-user me-sm-1"></i> -->
+                        <img src="/userImage/<%= userlogin.avatarImage %>" class="avatar avatar-sm me-3" alt="user image">
+                        <span class="d-sm-inline d-none">
+                                <%= userlogin.fullname %>
+                        </span>
                     </a>
                 </li>
                 <li class="nav-item d-xl-none ps-3 d-flex align-items-center">

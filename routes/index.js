@@ -1,22 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
+const authController = require('../config/controllers/authController')
 const indexController = require('../config/controllers/indexController')
 
-router.get('/',indexController.checklogin, function(req, res, next) {
-  var token = req.cookies.token
-  if(token){
-    res.render('index', { title: 'MinStore' });
-  }
-  else{
-    res.render('login', { title: 'LogIn' })
-  }
-  
-});
+router.get('/',authController.checklogin, indexController.index);
 
-router.get('/login', indexController.showLogin);
+router.get('/login', authController.showLogin);
 
-router.post('/login', indexController.login, indexController.loginSuccessfully);
+router.post('/login', authController.login, authController.loginSuccessfully);
 
 
 module.exports = router;

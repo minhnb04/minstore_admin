@@ -10,6 +10,8 @@ const cookieParser = require('cookie-parser');
 const db = require('./config/db/db')
 db.connectdb()
 
+const authController = require('./config/controllers/authController')
+
 const indexRouter = require('./routes/index');
 const dashboardRouter = require('./routes/dashboard');
 const usersRouter = require('./routes/users');
@@ -39,13 +41,13 @@ app.use(logger('dev'));
 app.use(methodOverride('_method'))
 
 //Phân luồng
-app.use('/', indexRouter);
-app.use('/dashboard', dashboardRouter);
-app.use('/users', usersRouter);
-app.use('/products', productsRouter);
-app.use('/orders', ordersRouter);
-app.use('/sales', salesRouter);
+app.use('/',indexRouter);
+app.use('/dashboard',authController.checklogin, dashboardRouter);
+app.use('/users',authController.checklogin, usersRouter);
+app.use('/products',authController.checklogin, productsRouter);
+app.use('/orders',authController.checklogin, ordersRouter);
+app.use('/sales',authController.checklogin, salesRouter);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`App listening on port ${port}`)
 })
