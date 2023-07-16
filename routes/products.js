@@ -24,10 +24,8 @@ router.put('/update/:id',authController.checkPermissionStaff, upload.array('prod
 
 router.delete('/delete/:id',authController.checkPermissionStaff,  productController.deleteProduct);
 
-router.get('/search',authController.checkPermissionStaff, productController.searchProduct);
+router.get('/search',authController.checkPermissionStaff,  productController.searchProduct);
 
-//api trả về ProductsJSON
-router.get('/getProducts', productController.getProducts);
 
 module.exports = router;
 

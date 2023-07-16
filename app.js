@@ -19,6 +19,8 @@ const productsRouter = require('./routes/products');
 const ordersRouter = require('./routes/orders');
 const salesRouter = require('./routes/dashboard');
 
+const productCilentRouter = require('./routes/client_api/product_client');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -41,12 +43,17 @@ app.use(logger('dev'));
 app.use(methodOverride('_method'))
 
 //Phân luồng
+//Admin
 app.use('/',indexRouter);
 app.use('/dashboard',authController.checklogin, dashboardRouter);
 app.use('/users',authController.checklogin, usersRouter);
 app.use('/products',authController.checklogin, productsRouter);
 app.use('/orders',authController.checklogin, ordersRouter);
 app.use('/sales',authController.checklogin, salesRouter);
+
+//Client
+app.use('/productCilent', productCilentRouter);
+
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
