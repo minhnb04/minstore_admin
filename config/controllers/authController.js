@@ -13,7 +13,7 @@ function makeKey(length) {
     return result;
 }
 
-const secretKey = makeKey(8)
+const secretKey = "minhnb04"
 
 class AuthController {
     
@@ -32,11 +32,11 @@ class AuthController {
         })
         .then((data) => {
             if (data) {
-                const token = jwt.sign({ _id: data._id }, secretKey, { expiresIn: '15m' });
+                const tokenAdmin = jwt.sign({ _id: data._id }, secretKey, { expiresIn: '15m' });
                 console.log(data);
-                console.log(token);
+                console.log(tokenAdmin);
 
-                res.cookie('token', token, { maxAge: 900000, httpOnly: true });
+                res.cookie('tokenAdmin', tokenAdmin, { maxAge: 900000, httpOnly: true });
                 next()
             } else {
                 return res.json("Login fail")
@@ -49,8 +49,8 @@ class AuthController {
 
     async checklogin(req, res, next) {
         try {
-            var token = req.cookies.token
-            var result = jwt.verify(token, secretKey)
+            var tokenAdmin = req.cookies.tokenAdmin
+            var result = jwt.verify(tokenAdmin, secretKey)
             res.secretKey = secretKey
             await User.findOne({_id:result._id})
             .then((user)=>{

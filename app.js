@@ -19,6 +19,7 @@ const productsRouter = require('./routes/products');
 const ordersRouter = require('./routes/orders');
 const salesRouter = require('./routes/dashboard');
 
+const authCilentRouter = require('./routes/client_api/auth_client');
 const productCilentRouter = require('./routes/client_api/product_client');
 
 // view engine setup
@@ -52,6 +53,7 @@ app.use('/orders',authController.checklogin, ordersRouter);
 app.use('/sales',authController.checklogin, salesRouter);
 
 //Client
+app.use('/authCilent', authCilentRouter);
 app.use('/productCilent', productCilentRouter);
 
 

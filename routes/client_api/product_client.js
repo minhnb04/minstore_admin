@@ -7,6 +7,13 @@ const productClientController = require('../../config/clientController/productCl
 // /productCilent/getProducts
 router.get('/getProducts', productClientController.getProducts);
 
+router.get('/getMobiles', productClientController.getMobiles);
+
+router.get('/getTablets', productClientController.getTablets);
+
+router.get('/getAccessories', productClientController.getAccessories);
+
+
 
 module.exports = router;
 

@@ -26,7 +26,6 @@ class ProductController {
                         status: product.status,
                     }
                 })
-                console.log(lsProduct)
                 var productsJSON = JSON.stringify(lsProduct)
                 res.render('products', { title: 'Products Management',userlogin, lsProduct, productsJSON})
             })

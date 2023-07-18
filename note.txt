@@ -13,3 +13,637 @@ Sales: doanh thu bán hàng
 mongodb+srv://minhnb04:byUia9oS3jND8tvX@cluster0.ltuhtop.mongodb.net/minstore
 
     var usersData = <%- JSON.stringify(lsUser) %>
+
+    netstat -ano | findstr :<port>
+
+    taskkill /F /PID <PID>
+
+
+
+Data Test
+
+//Users
+
+[{
+  "_id": {
+    "$oid": "64840bd638c8fc614fcad474"
+  },
+  "employeeCode": "002",
+  "fullname": "Lê Phương Thảo",
+  "username": "thaolp",
+  "password": "123",
+  "role": 2,
+  "phoneNumber": "0395813997",
+  "email": "thaolp@gmail.com",
+  "avatarImage": "1688034054562-marie.jpg",
+  "birthday": "1997-09-27",
+  "gender": 2,
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64840c5d38c8fc614fcad477"
+  },
+  "employeeCode": "003",
+  "fullname": "Nguyễn Bá Việt Hoàng",
+  "username": "hoangnbv",
+  "password": "123",
+  "role": 2,
+  "phoneNumber": "0977715041",
+  "email": "hoangnbv@gmail.com",
+  "avatarImage": "1688182571302-team-3.jpg",
+  "birthday": "2003-08-28",
+  "gender": 1,
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "649d47d18b79ff5674462b17"
+  },
+  "employeeCode": "0003",
+  "fullname": "Nguyễn Văn Anh",
+  "username": "anv",
+  "password": "1",
+  "role": 2,
+  "phoneNumber": "00011",
+  "email": "anv@gmail.com",
+  "avatarImage": "1688803039422-ivancik.jpg",
+  "birthday": "2023-06-02",
+  "gender": 1,
+  "status": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "649d560b02b024bf11db229c"
+  },
+  "employeeCode": "001",
+  "fullname": "Nguyễn Bá Minh",
+  "username": "minhnb",
+  "password": "1",
+  "role": 1,
+  "phoneNumber": "0978177400",
+  "email": "minhnb04@gmail.com",
+  "avatarImage": "1688034039038-avatar.jpg",
+  "birthday": "1995-12-04",
+  "gender": 1,
+  "status": true,
+  "__v": 0
+}]
+
+
+//Products
+
+[{
+  "_id": {
+    "$oid": "64a148d274e4294c92d99872"
+  },
+  "productName": "iPhone 14 Pro Max",
+  "brand": "Apple",
+  "classify": "Mobile",
+  "color": "white",
+  "quantity": 11,
+  "specifications": "Cấu hình",
+  "memory": 64,
+  "price": 26990000,
+  "lastUpdated": "2023-07-16",
+  "productImages": [
+    "1689223024979-iphone-14-pro-max-bac.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64a9181d8029764522e35fd4"
+  },
+  "productName": "iPhone 13",
+  "brand": "Apple",
+  "classify": "Mobile",
+  "color": "white",
+  "quantity": 20,
+  "specifications": "Cấu hình",
+  "memory": 64,
+  "price": 16990000,
+  "lastUpdated": "2023-07-05",
+  "productImages": [
+    "1689223016702-iphone-13-1-4.jpg"
+  ],
+  "status": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64af7fbd29b0a5553c1b7943"
+  },
+  "productName": "iPhone 12",
+  "brand": "Apple",
+  "classify": "Mobile",
+  "color": "blue",
+  "quantity": 40,
+  "specifications": "Cấu hình",
+  "memory": 256,
+  "price": 15490000,
+  "lastUpdated": "2023-07-02",
+  "productImages": [
+    "1689223101492-iphone-12-xanh-duong-1-1-org.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64af7ff829b0a5553c1b7946"
+  },
+  "productName": "iPhone 12",
+  "brand": "Apple",
+  "classify": "Mobile",
+  "color": "purple",
+  "quantity": 25,
+  "specifications": "Cấu hình",
+  "memory": 64,
+  "price": 15490000,
+  "lastUpdated": "2023-07-04",
+  "productImages": [
+    "1689223160375-iphone-12-1-2.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64af811f29b0a5553c1b7950"
+  },
+  "productName": "iPhone 11",
+  "brand": "Apple",
+  "classify": "Mobile",
+  "color": "white",
+  "quantity": 24,
+  "specifications": "Cấu hình",
+  "memory": 64,
+  "price": 10690000,
+  "lastUpdated": "2023-06-17",
+  "productImages": [
+    "1689223455886-iphone-11-trang-1-2-org.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64af81ae29b0a5553c1b7953"
+  },
+  "productName": "iPhone 11",
+  "brand": "Apple",
+  "classify": "Mobile",
+  "color": "black",
+  "quantity": 17,
+  "specifications": "Cấu hình",
+  "memory": 128,
+  "price": 10690000,
+  "lastUpdated": "2023-07-04",
+  "productImages": [
+    "1689223598034-iphone-11-den-1-1-1-org.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64af834429b0a5553c1b7959"
+  },
+  "productName": "Galaxy Z Fold4 5G",
+  "brand": "Samsung",
+  "classify": "Mobile",
+  "color": "black",
+  "quantity": 13,
+  "specifications": "Cấu hình",
+  "memory": 256,
+  "price": 29990000,
+  "lastUpdated": "2023-07-05",
+  "productImages": [
+    "1689224004325-samsung-galaxy-z-fold-4-256gb-1.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64af839029b0a5553c1b795c"
+  },
+  "productName": "Galaxy Z Fold4 5G ",
+  "brand": "Samsung",
+  "classify": "Mobile",
+  "color": "gold",
+  "quantity": 22,
+  "specifications": "Cấu hình",
+  "memory": 512,
+  "price": 33490000,
+  "lastUpdated": "2023-07-05",
+  "productImages": [
+    "1689224080776-samsung-galaxy-z-fold4-256gb-1.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64af880029b0a5553c1b7965"
+  },
+  "productName": "Galaxy Z Flip4 5G",
+  "brand": "Samsung",
+  "classify": "Mobile",
+  "color": "gold",
+  "quantity": 12,
+  "specifications": "Cấu hình",
+  "memory": 256,
+  "price": 19990000,
+  "lastUpdated": "2023-07-05",
+  "productImages": [
+    "1689225216651-sam-sung-galaxy-zflip4-vang-hong-1.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64af88bd29b0a5553c1b7968"
+  },
+  "productName": "Galaxy S23 Ultra 5G",
+  "brand": "Samsung",
+  "classify": "Mobile",
+  "color": "purple",
+  "quantity": 26,
+  "specifications": "Cấu hình",
+  "memory": 256,
+  "price": 26990000,
+  "lastUpdated": "2023-07-05",
+  "productImages": [
+    "1689225405856-samsung-galaxy-s-ultra-tim-1.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64af89d729b0a5553c1b7971"
+  },
+  "productName": "Galaxy A54 5G",
+  "brand": "Samsung",
+  "classify": "Mobile",
+  "color": "purple",
+  "quantity": 32,
+  "specifications": "Cấu hình",
+  "memory": 256,
+  "price": 9990000,
+  "lastUpdated": "2023-07-05",
+  "productImages": [
+    "1689225687338-samsung-galaxy-a54-tim-glr-1.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64af8adf29b0a5553c1b7974"
+  },
+  "productName": "OPPO Reno8 5G",
+  "brand": "Oppo",
+  "classify": "Mobile",
+  "color": "black",
+  "quantity": 15,
+  "specifications": "Cấu hình",
+  "memory": 256,
+  "price": 13990000,
+  "lastUpdated": "2023-06-28",
+  "productImages": [
+    "1689225951049-oppo-reno8-pro-black-1.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64af8bea29b0a5553c1b797a"
+  },
+  "productName": "OPPO Find N2 Flip 5G",
+  "brand": "Oppo",
+  "classify": "Mobile",
+  "color": "purple",
+  "quantity": 23,
+  "specifications": "Cấu hình",
+  "memory": 256,
+  "price": 19990000,
+  "lastUpdated": "2023-06-21",
+  "productImages": [
+    "1689226218109-oppo-n2-flip-tim-1-1.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64af8c2929b0a5553c1b797d"
+  },
+  "productName": "OPPO A77s",
+  "brand": "Oppo",
+  "classify": "Mobile",
+  "color": "blue",
+  "quantity": 28,
+  "specifications": "Cấu hình",
+  "memory": 128,
+  "price": 6290000,
+  "lastUpdated": "2023-07-06",
+  "productImages": [
+    "1689226281468-oppo-a77s-xanh-1.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64af8caf29b0a5553c1b7980"
+  },
+  "productName": "Xiaomi Redmi 12",
+  "brand": "Xiaomi",
+  "classify": "Mobile",
+  "color": "silver",
+  "quantity": 21,
+  "specifications": "Cấu hình",
+  "memory": 128,
+  "price": 4290000,
+  "lastUpdated": "2023-07-14",
+  "productImages": [
+    "1689226415845-xiaomi-redmi-12-bac-1-2.jpg"
+  ],
+  "status": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64af8cf629b0a5553c1b7983"
+  },
+  "productName": "Redmi Note 12 Pro",
+  "brand": "Xiaomi",
+  "classify": "Mobile",
+  "color": "white",
+  "quantity": 16,
+  "specifications": "Cấu hình",
+  "memory": 256,
+  "price": 7690000,
+  "lastUpdated": "2023-07-04",
+  "productImages": [
+    "1689226486012-xiaomi-redmi-note-12-pro-trang-1-1.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64af8d5429b0a5553c1b7986"
+  },
+  "productName": "Xiaomi 12T 5G",
+  "brand": "Xiaomi",
+  "classify": "Mobile",
+  "color": "silver",
+  "quantity": 20,
+  "specifications": "Cấu hình",
+  "memory": 256,
+  "price": 11990000,
+  "lastUpdated": "2023-06-27",
+  "productImages": [
+    "1689226580298-xiaomi-12t-bac-glr-1.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b1123708c0538a3adcccbf"
+  },
+  "productName": "iPad 10 WiFi",
+  "brand": "Apple",
+  "classify": "Tablet",
+  "color": "gold",
+  "quantity": 17,
+  "specifications": "Cấu hình",
+  "memory": 64,
+  "price": 11190000,
+  "lastUpdated": "2023-07-05",
+  "productImages": [
+    "1689326431690-ipad-10-vang-glr-1.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b1140baf2cb632562ebfe6"
+  },
+  "productName": "iPad Pro M2",
+  "brand": "Apple",
+  "classify": "Tablet",
+  "color": "silver",
+  "quantity": 20,
+  "specifications": "Cấu hình",
+  "memory": 64,
+  "price": 24590000,
+  "lastUpdated": "2023-07-05",
+  "productImages": [
+    "1689326603036-ipad-pro-m2-5g-sliver-1.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b11646af2cb632562ebfee"
+  },
+  "productName": "Galaxy Tab S8 Ultra 5G",
+  "brand": "Samsung",
+  "classify": "Tablet",
+  "color": "gray",
+  "quantity": 18,
+  "specifications": "Cấu hình",
+  "memory": 128,
+  "price": 25990000,
+  "lastUpdated": "2023-06-28",
+  "productImages": [
+    "1689327174090-samsung-galaxy-tab-s8-ultra-1-1.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b11681af2cb632562ebff1"
+  },
+  "productName": "Galaxy Tab S7",
+  "brand": "Samsung",
+  "classify": "Tablet",
+  "color": "black",
+  "quantity": 16,
+  "specifications": "Cấu hình",
+  "memory": 64,
+  "price": 10990000,
+  "lastUpdated": "2023-05-19",
+  "productImages": [
+    "1689327233441-samsung-galaxy-tab-s7-fe-blac.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b1172faf2cb632562ebff7"
+  },
+  "productName": "Xiaomi Redmi Pad (4GB)",
+  "brand": "Xiaomi",
+  "classify": "Tablet",
+  "color": "silver",
+  "quantity": 12,
+  "specifications": "Cấu hình",
+  "memory": 128,
+  "price": 5790000,
+  "lastUpdated": "2023-06-15",
+  "productImages": [
+    "1689327407008-xiaomi-redmi-pad-sliver-5.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b11776af2cb632562ebffb"
+  },
+  "productName": "Xiaomi Redmi Pad (3GB)",
+  "brand": "Xiaomi",
+  "classify": "Tablet",
+  "color": "white",
+  "quantity": 13,
+  "specifications": "Cấu hình",
+  "memory": 64,
+  "price": 5090000,
+  "lastUpdated": "2023-07-05",
+  "productImages": [
+    "1689327478460-xiaomi-redmi-pad-green-5.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b11a47af2cb632562ec006"
+  },
+  "productName": "Samsung Galaxy Buds 2",
+  "brand": "Samsung",
+  "classify": "Accessories",
+  "color": "white",
+  "quantity": 26,
+  "specifications": "Cấu hình",
+  "memory": 0,
+  "price": 1990000,
+  "lastUpdated": "2023-07-05",
+  "productImages": [
+    "1689328199321-samsung-galaxy-buds-2.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b11a6faf2cb632562ec009"
+  },
+  "productName": "AirPods 2",
+  "brand": "Apple",
+  "classify": "Accessories",
+  "color": "Select color",
+  "quantity": 24,
+  "specifications": "Cấu hình",
+  "memory": 0,
+  "price": 2650000,
+  "lastUpdated": "2023-07-05",
+  "productImages": [
+    "1689328239496-airpods-2.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b11ae2af2cb632562ec00c"
+  },
+  "productName": "Cáp Type C - Lightning Apple",
+  "brand": "Apple",
+  "classify": "Accessories",
+  "color": "white",
+  "quantity": 22,
+  "specifications": "Cấu hình",
+  "memory": 0,
+  "price": 490000,
+  "lastUpdated": "2023-07-05",
+  "productImages": [
+    "1689328354911-cap-type-c-lightning-1m.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b11b0caf2cb632562ec00f"
+  },
+  "productName": "Sạc Apple 20W",
+  "brand": "Apple",
+  "classify": "Accessories",
+  "color": "white",
+  "quantity": 31,
+  "specifications": "Cấu hình",
+  "memory": 0,
+  "price": 520000,
+  "lastUpdated": "2023-07-05",
+  "productImages": [
+    "1689328396640-adapter-sac-type-c-20.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b11b82af2cb632562ec012"
+  },
+  "productName": "Samsung 25W EB-P3400",
+  "brand": "Samsung",
+  "classify": "Accessories",
+  "color": "gray",
+  "quantity": 17,
+  "specifications": "Cấu hình",
+  "memory": 0,
+  "price": 890000,
+  "lastUpdated": "2023-07-05",
+  "productImages": [
+    "1689328514744-samsung-eb-p3400-thumb-1-600x600.jpg"
+  ],
+  "status": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b11baeaf2cb632562ec015"
+  },
+  "productName": "OPPO 18W PBT02",
+  "brand": "Oppo",
+  "classify": "Accessories",
+  "color": "black",
+  "quantity": 23,
+  "specifications": "Cấu hình",
+  "memory": 0,
+  "price": 685000,
+  "lastUpdated": "2023-07-05",
+  "productImages": [
+    "1689328558308-oppo-pbt02-thumb.jpg"
+  ],
+  "status": true,
+  "__v": 0
+}]
