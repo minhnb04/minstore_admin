@@ -112,13 +112,11 @@ class ProductController {
                 }
             )
                 .then(function(){
-
                     if (JSON.stringify(oldproductImage) != JSON.stringify(images)) {
                         oldproductImage.forEach(function (image){
                             fs.unlinkSync('uploads/productImage/'+image);
                         })
                     }
-
                     res.redirect('/products')
                 })
                 .catch(next)

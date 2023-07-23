@@ -3,69 +3,116 @@
         <div class="card">
             <div class="card-header pb-0 px-3 d-flex justify-content-between">
                 <h6 class="mb-0">Orders list</h6>
-                <a class="btn btn-link text-success px-3 mb-0" href="javascript:;"><i class="fas fa-plus text-success me-2" aria-hidden="true"></i>Add</a>
+                <a class="btn btn-link text-success px-3 mb-0" data-bs-toggle="modal" data-bs-target="#addOrderModal"
+                    data-bs-whatever="@mdo"><i class="fas fa-plus text-success me-2" aria-hidden="true"></i>Add</a>
             </div>
 
             <table class="table align-items-center mb-0">
                 <thead>
-                <tr>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Stt</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer name</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Product</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pay</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
-                </tr>
+                    <tr>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Stt
+                        </th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer name
+                        </th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Product
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Price</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pay
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Action</th>
+                    </tr>
                 </thead>
                 <tbody>
 
-                <% for (var i = 0; i < 7; i++){ %>
-                    <%- include('orders-item'); %>
-                <% } %>
+                    <% lsOrder.forEach((order, i)=>{ %>
+                        <%- include('orders-item',{order,i}); %>
+                    <% }) %>
 
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
 
-<!--            <div class="card-body pt-4 p-3">-->
-<!--                <ul class="list-group">-->
-<!--                    <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">-->
-<!--                        <div class="d-flex flex-column">-->
-<!--                            <h6 class="mb-3 text-sm">Oliver Liam</h6>-->
-<!--                            <span class="mb-2 text-xs">Company Name: <span class="text-dark font-weight-bold ms-sm-2">Viking Burrito</span></span>-->
-<!--                            <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">oliver@burrito.com</span></span>-->
-<!--                            <span class="text-xs">VAT Number: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>-->
-<!--                        </div>-->
-<!--                        <div class="ms-auto text-end">-->
-<!--                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>-->
-<!--                            <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">-->
-<!--                        <div class="d-flex flex-column">-->
-<!--                            <h6 class="mb-3 text-sm">Lucas Harper</h6>-->
-<!--                            <span class="mb-2 text-xs">Company Name: <span class="text-dark font-weight-bold ms-sm-2">Stone Tech Zone</span></span>-->
-<!--                            <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">lucas@stone-tech.com</span></span>-->
-<!--                            <span class="text-xs">VAT Number: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>-->
-<!--                        </div>-->
-<!--                        <div class="ms-auto text-end">-->
-<!--                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>-->
-<!--                            <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">-->
-<!--                        <div class="d-flex flex-column">-->
-<!--                            <h6 class="mb-3 text-sm">Ethan James</h6>-->
-<!--                            <span class="mb-2 text-xs">Company Name: <span class="text-dark font-weight-bold ms-sm-2">Fiber Notion</span></span>-->
-<!--                            <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">ethan@fiber.com</span></span>-->
-<!--                            <span class="text-xs">VAT Number: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>-->
-<!--                        </div>-->
-<!--                        <div class="ms-auto text-end">-->
-<!--                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>-->
-<!--                            <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </div>-->
+
+<!-- Add Order -->
+
+<div class="modal fade" id="addOrderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header  d-flex justify-content-around">
+                <div></div>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add Order</h1>
+                <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="orders/add-order" method="POST">
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Buyer:</label>
+                        <input name="buyerName" type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Phone:</label>
+                        <input name="phoneNumber" type="text" class="form-control" id="recipient-name">
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Address:</label>
+                        <input name="address" type="text" class="form-control" id="recipient-name">
+                    </div>
+
+                    <select name="product" class="form-select" aria-label="Default select example">
+                        <option selected>Choose Product</option>
+                        <% lsProduct.forEach((product)=>{ %>
+                            <option value="<%= product._id %>"><%= product.productName %></option>
+                        <% }) %>
+                    </select>
+
+                    <div class="d-flex justify-content-between">
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Quantity:</label>
+                            <input name="quantity" type="number" class="form-control" id="recipient-name">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Price:</label>
+                            <input name="priceOrder" type="number" class="form-control" id="recipient-name">
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Purchase date:</label>
+                        <input name="date" type="date" class="form-control" id="recipient-name">
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Payment Status:</label>
+                            <select name="paymentStatus" class="form-select" aria-label="Default select example">
+                                <option class="text-danger" value="false" selected>Unpaid</option>
+                                <option class="text-success" value="true">Paid</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Order Status:</label>
+                            <select name="orderStatus" class="form-select me-3" aria-label="Default select example">
+                                <option class="text-danger" value="false" selected>Unsuccessful</option>
+                                <option class="text-success" value="true">Succeeded</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>

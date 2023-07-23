@@ -75,7 +75,6 @@ class UserController {
             }catch (err) {
                 next(err);
             }
-
         }else {
             console.log("Yêu cầu nhập đầy đủ thông tin!")
         }

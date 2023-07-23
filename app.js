@@ -21,6 +21,7 @@ const salesRouter = require('./routes/dashboard');
 
 const authCilentRouter = require('./routes/client_api/auth_client');
 const productCilentRouter = require('./routes/client_api/product_client');
+const orderCilentRouter = require('./routes/client_api/order_client');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -55,6 +56,7 @@ app.use('/sales',authController.checklogin, salesRouter);
 //Client
 app.use('/authCilent', authCilentRouter);
 app.use('/productCilent', productCilentRouter);
+app.use('/orderCilent', orderCilentRouter);
 
 
 app.listen(port, () => {

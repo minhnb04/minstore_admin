@@ -184,6 +184,7 @@
     updateProductModal.addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget
         productId = button.getAttribute('data-id')
+        console.log(productId);
         currentProduct = productsData.find((product)=> product._id == productId)
 
         document.getElementById('productNameUpdate').value = currentProduct.productName

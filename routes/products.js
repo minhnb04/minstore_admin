@@ -6,7 +6,7 @@ const authController = require('../config/controllers/authController')
 const productController = require('../config/controllers/productController')
 
 const storage = multer.diskStorage({
-    destination:(req, file,res)=>{
+    destination:(req, file, res)=>{
         res(null, 'uploads/productImage')
     },
     filename: (req, file, res)=>{
