@@ -16,11 +16,13 @@
                         </th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product
                         </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price        
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Price
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pay
                         </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Status
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Action</th>
@@ -30,14 +32,13 @@
 
                     <% lsOrder.forEach((order, i)=>{ %>
                         <%- include('orders-item',{order,i}); %>
-                    <% }) %>
+                            <% }) %>
 
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-
 
 <!-- Add Order -->
 
@@ -50,7 +51,7 @@
                 <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="orders/add-order" method="POST">
+                <form id="add_order_form" action="orders/add-order" method="POST">
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Buyer:</label>
                         <input name="buyerName" type="text" class="form-control" id="recipient-name">
@@ -65,29 +66,32 @@
                         <input name="address" type="text" class="form-control" id="recipient-name">
                     </div>
 
-                    <select name="product" class="form-select" aria-label="Default select example">
-                        <option selected>Choose Product</option>
+                    <select name="product" id="productAdd" onchange="setPriceOrder('add')" class="form-select"
+                        aria-label="Default select example">
+                        <option>Choose Product</option>
                         <% lsProduct.forEach((product)=>{ %>
-                            <option value="<%= product._id %>"><%= product.productName %></option>
-                        <% }) %>
+                            <option value="<%= product._id %>" data-price="<%= product.price %>">
+                                <%= product.productName %>
+                            </option>
+                            <% }) %>
                     </select>
 
                     <div class="d-flex justify-content-between">
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Quantity:</label>
-                            <input name="quantity" type="number" class="form-control" id="recipient-name">
+                            <input onchange="setPriceOrder('add')" name="quantity" id="quantityAdd" type="number"
+                                class="form-control">
                         </div>
 
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Price:</label>
-                            <input name="priceOrder" type="number" class="form-control" id="recipient-name">
+                            <input name="priceOrder" id="priceOrderAdd" type="number" class="form-control">
                         </div>
                     </div>
 
-
                     <div class="mb-3">
                         <label for="message-text" class="col-form-label">Purchase date:</label>
-                        <input name="date" type="date" class="form-control" id="recipient-name">
+                        <input name="date" type="date" class="form-control" id="dateAdd">
                     </div>
 
                     <div class="d-flex justify-content-between">
@@ -107,7 +111,7 @@
                             </select>
                         </div>
                     </div>
-                    
+
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Add</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -169,22 +173,25 @@
                         <input name="address" type="text" class="form-control" id="addressUpdate">
                     </div>
 
-                    <select name="product" id="productUpdate" class="form-select" aria-label="Default select example">
+                    <select name="product" id="productUpdate" onchange="setPriceOrder('update')" class="form-select"
+                        aria-label="Default select example">
                         <option selected>Choose Product</option>
                         <% lsProduct.forEach((product)=>{ %>
-                            <option value="<%= product._id %>"><%= product.productName %></option>
-                        <% }) %>
+                            <option value="<%= product._id %>" data-price="<%= product.price %>"><%= product.productName %></option>
+                            <% }) %>
                     </select>
+
 
                     <div class="d-flex justify-content-between">
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Quantity:</label>
-                            <input name="quantity" type="number" class="form-control" id="quantityUpdate">
+                            <input onchange="setPriceOrder('update')" name="quantity" type="number" class="form-control"
+                                id="quantityUpdate">
                         </div>
 
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Price:</label>
-                            <input name="priceOrder" type="number" class="form-control" id="priceOrderUpdate">
+                            <input name="priceOrder" id="priceOrderUpdate" type="number" class="form-control">
                         </div>
                     </div>
 
@@ -197,7 +204,8 @@
                     <div class="d-flex justify-content-between">
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Payment Status:</label>
-                            <select name="paymentStatus" id="paymentStatusUpdate" class="form-select" aria-label="Default select example">
+                            <select name="paymentStatus" id="paymentStatusUpdate" class="form-select"
+                                aria-label="Default select example">
                                 <option class="text-danger" value="false" selected>Unpaid</option>
                                 <option class="text-success" value="true">Paid</option>
                             </select>
@@ -205,13 +213,14 @@
 
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Order Status:</label>
-                            <select name="orderStatus" id="orderStatusUpdate" class="form-select me-3" aria-label="Default select example">
+                            <select name="orderStatus" id="orderStatusUpdate" class="form-select me-3"
+                                aria-label="Default select example">
                                 <option class="text-danger" value="false" selected>Unsuccessful</option>
                                 <option class="text-success" value="true">Succeeded</option>
                             </select>
                         </div>
                     </div>
-                    
+
                     <div class="modal-footer">
                         <button id="btn_cf_update_order" type="submit" class="btn btn-primary">Update</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -226,7 +235,9 @@
 <script>
     //Lấy danh sách product từ server
     var ordersData = <%- JSON.stringify(lsOrder) %>
-    console.log(ordersData);
+        console.log(ordersData);
+
+    var addOrderModal = document.getElementById('addOrderModal')
 
     var deleteOrderModal = document.getElementById('deleteOrderModal')
     var btn_cf_delete_order = document.getElementById('btn_cf_delete_order')
@@ -239,22 +250,36 @@
     var orderId;
     var currentOrder;
 
+
+    addOrderModal.addEventListener('show.bs.modal', function (event) {
+        
+        const today = new Date()
+        const year = today.getFullYear()
+        const month = String(today.getMonth()+1).padStart(2,'0')
+        const day = String(today.getDate()).padStart(2,'0')
+
+        // console.log(`${year}-${month}-${day}`)
+        document.getElementById('dateAdd').value = `${year}-${month}-${day}`;
+    })
+
+
+
     deleteOrderModal.addEventListener('show.bs.modal', function (event) {
-      var button = event.relatedTarget
+        var button = event.relatedTarget
         orderId = button.getAttribute('data-id')
 
     })
 
-    btn_cf_delete_order.onclick = function (){
-        delete_order_form.action = '/orders/delete/'+ orderId+'?_method=DELETE'
+    btn_cf_delete_order.onclick = function () {
+        delete_order_form.action = '/orders/delete/' + orderId + '?_method=DELETE'
         delete_order_form.submit()
     }
 
     updateOrderModal.addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget
         orderId = button.getAttribute('data-id')
-        currentOrder = ordersData.find((order)=> {
-           return order._id == orderId
+        currentOrder = ordersData.find((order) => {
+            return order._id == orderId
         })
 
         document.getElementById('buyerNameUpdate').value = currentOrder.buyerName
@@ -265,20 +290,38 @@
         document.getElementById('priceOrderUpdate').value = currentOrder.priceOrder
         document.getElementById('paymentStatusUpdate').value = currentOrder.paymentStatus
         document.getElementById('orderStatusUpdate').value = currentOrder.orderStatus
-        
-        const day = String(currentOrder.date).slice(0,2)
-        const month = String(currentOrder.date).slice(3,5)
-        const year = String(currentOrder.date).slice(6,10)
+
+        const day = String(currentOrder.date).slice(0, 2)
+        const month = String(currentOrder.date).slice(3, 5)
+        const year = String(currentOrder.date).slice(6, 10)
         document.getElementById('dateUpdate').value = `${year}-${month}-${day}`;
 
         document.getElementById('productUpdate').value = currentOrder.product.id
-        
+
     })
 
-    btn_cf_update_order.onclick = function(){
-        update_order_form.action = '/orders/update/'+orderId+'?_method=PUT'
+    btn_cf_update_order.onclick = function () {
+        update_order_form.action = '/orders/update/' + orderId + '?_method=PUT'
         update_order_form.submit()
     }
 
+
+    function setPriceOrder(x) {
+        if (x == 'add') {
+            var productSelect = document.getElementById('productAdd')
+            var quantity = document.getElementById('quantityAdd')
+            var priceOrder = document.getElementById('priceOrderAdd')
+        }else if(x == 'update'){
+            var productSelect = document.getElementById('productUpdate')
+            var quantity = document.getElementById('quantityUpdate')
+            var priceOrder = document.getElementById('priceOrderUpdate')
+        }else{
+            console.log('Saiiiiiiii!');
+        }
+
+        const productPrice = productSelect.options[productSelect.selectedIndex];
+        const price = productPrice.getAttribute("data-price");
+        priceOrder.value = Number(price) * Number(quantity.value)
+    }
 
 </script>
