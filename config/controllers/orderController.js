@@ -31,7 +31,7 @@ class OrderController {
 
     }
 
-    async index(req, res,next) {
+    async index(req, res, next) {
         const userlogin = req.userlogin
         const lsProduct = res.products
         await Order.find()
@@ -40,11 +40,12 @@ class OrderController {
                     var date = order.date
                     date = date.slice(8, 10) + '/' + date.slice(5, 7) + '/' + date.slice(0, 4)
                     return {
+                        _id: order._id,
                         buyerName: order.buyerName,
                         phoneNumber: order.phoneNumber,
                         address: order.address,
                         product: {
-                            id: order.product._id,
+                            id: order.product.id,
                             productName: order.product.productName,
                             color: order.product.color,
                             memory: order.product.memory,
@@ -58,7 +59,7 @@ class OrderController {
                         orderStatus: order.orderStatus,
                     }
                 })
- 
+
                 console.log(lsOrder);
                 res.render('orders', { title: 'Orders Management', userlogin, lsOrder, lsProduct })
             })
@@ -67,7 +68,6 @@ class OrderController {
             })
 
     }
-
 
     async addOrder(req, res, next) {
         console.log(req.body);
@@ -81,28 +81,28 @@ class OrderController {
             && req.body.date
         ) {
 
-            await Product.find({_id:req.body.product})
-            .then((products) => {
-                var lsProduct = products.map(function (product) {
-                    var date = product.lastUpdated
-                    date = date.slice(8, 10) + '/' + date.slice(5, 7) + '/' + date.slice(0, 4)
-                    return {
-                        _id: product._id,
-                        productName: product.productName,
-                        brand: product.brand,
-                        classify: product.classify,
-                        color: product.color,
-                        specifications: product.specifications,
-                        memory: product.memory,
-                        price: product.price,
-                        productImages: product.productImages,
-                    }
+            await Product.find({ _id: req.body.product })
+                .then((products) => {
+                    var lsProduct = products.map(function (product) {
+                        var date = product.lastUpdated
+                        date = date.slice(8, 10) + '/' + date.slice(5, 7) + '/' + date.slice(0, 4)
+                        return {
+                            _id: product._id,
+                            productName: product.productName,
+                            brand: product.brand,
+                            classify: product.classify,
+                            color: product.color,
+                            specifications: product.specifications,
+                            memory: product.memory,
+                            price: product.price,
+                            productImages: product.productImages,
+                        }
+                    })
+                    res.productBuy = lsProduct[0]
                 })
-                res.productBuy = lsProduct[0]
-            })
-            .catch((error) => {
-                next(error)
-            })
+                .catch((error) => {
+                    next(error)
+                })
 
             var order = new Order(
                 {
@@ -143,6 +143,71 @@ class OrderController {
 
     }
 
+    async updateOrder(req, res, next) {
+
+        await Product.find({ _id: req.body.product })
+            .then((products) => {
+                var lsProduct = products.map(function (product) {
+                    var date = product.lastUpdated
+                    date = date.slice(8, 10) + '/' + date.slice(5, 7) + '/' + date.slice(0, 4)
+                    return {
+                        _id: product._id,
+                        productName: product.productName,
+                        brand: product.brand,
+                        classify: product.classify,
+                        color: product.color,
+                        specifications: product.specifications,
+                        memory: product.memory,
+                        price: product.price,
+                        productImages: product.productImages,
+                    }
+                })
+                res.productBuy = lsProduct[0]
+            })
+            .catch((error) => {
+                next(error)
+            })
+
+        await Order.updateOne({ _id: req.params.id },
+            {
+                buyerName: req.body.buyerName,
+                phoneNumber: req.body.phoneNumber,
+                address: req.body.address,
+
+                product: {
+                    id: res.productBuy._id,
+                    productName: res.productBuy.productName,
+                    color: res.productBuy.color,
+                    memory: res.productBuy.memory,
+                    productImages: res.productBuy.productImages,
+                    price: res.productBuy.price,
+                },
+
+                quantity: req.body.quantity,
+                priceOrder: req.body.priceOrder,
+                date: req.body.date,
+                price: req.body.price,
+                paymentStatus: req.body.paymentStatus,
+                orderStatus: req.body.orderStatus,
+            })
+            .then(function () {
+                res.redirect('/orders')
+            })
+            .catch(next)
+
+
+
+
+    }
+
+    async deleteOrder(req, res, next) {
+        await Order.deleteOne({ _id: req.params.id })
+            .then(() => {
+                console.log('Thanh cong');
+                return res.redirect('/orders')
+            })
+            .catch(next)
+    }
 }
 
 module.exports = new OrderController;

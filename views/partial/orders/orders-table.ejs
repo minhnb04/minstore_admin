@@ -14,11 +14,13 @@
                         </th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer name
                         </th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Product
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product
                         </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Price</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price        
+                        </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pay
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Action</th>
@@ -116,3 +118,167 @@
         </div>
     </div>
 </div>
+
+
+<!-- Delete -->
+<form id="delete_order_form" method="POST"></form>
+
+<!-- Modal delete order -->
+<div class="modal fade" id="deleteOrderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Do you want to delete this order?
+            </div>
+            <div class="modal-footer">
+                <button id="btn_cf_delete_order" type="button" class="btn btn-primary bg-danger">Delete</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Update Order -->
+
+<div class="modal fade" id="updateOrderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header  d-flex justify-content-around">
+                <div></div>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Order</h1>
+                <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="update_order_form" method="POST">
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Buyer:</label>
+                        <input name="buyerName" type="text" class="form-control" id="buyerNameUpdate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Phone:</label>
+                        <input name="phoneNumber" type="text" class="form-control" id="phoneNumberUpdate">
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Address:</label>
+                        <input name="address" type="text" class="form-control" id="addressUpdate">
+                    </div>
+
+                    <select name="product" id="productUpdate" class="form-select" aria-label="Default select example">
+                        <option selected>Choose Product</option>
+                        <% lsProduct.forEach((product)=>{ %>
+                            <option value="<%= product._id %>"><%= product.productName %></option>
+                        <% }) %>
+                    </select>
+
+                    <div class="d-flex justify-content-between">
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Quantity:</label>
+                            <input name="quantity" type="number" class="form-control" id="quantityUpdate">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Price:</label>
+                            <input name="priceOrder" type="number" class="form-control" id="priceOrderUpdate">
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Purchase date:</label>
+                        <input name="date" type="date" class="form-control" id="dateUpdate">
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Payment Status:</label>
+                            <select name="paymentStatus" id="paymentStatusUpdate" class="form-select" aria-label="Default select example">
+                                <option class="text-danger" value="false" selected>Unpaid</option>
+                                <option class="text-success" value="true">Paid</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Order Status:</label>
+                            <select name="orderStatus" id="orderStatusUpdate" class="form-select me-3" aria-label="Default select example">
+                                <option class="text-danger" value="false" selected>Unsuccessful</option>
+                                <option class="text-success" value="true">Succeeded</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button id="btn_cf_update_order" type="submit" class="btn btn-primary">Update</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    //Lấy danh sách product từ server
+    var ordersData = <%- JSON.stringify(lsOrder) %>
+    console.log(ordersData);
+
+    var deleteOrderModal = document.getElementById('deleteOrderModal')
+    var btn_cf_delete_order = document.getElementById('btn_cf_delete_order')
+    var delete_order_form = document.getElementById('delete_order_form')
+
+    var updateOrderModal = document.getElementById('updateOrderModal')
+    var btn_cf_update_order = document.getElementById('btn_cf_update_order')
+    var update_order_form = document.getElementById('update_order_form')
+
+    var orderId;
+    var currentOrder;
+
+    deleteOrderModal.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget
+        orderId = button.getAttribute('data-id')
+
+    })
+
+    btn_cf_delete_order.onclick = function (){
+        delete_order_form.action = '/orders/delete/'+ orderId+'?_method=DELETE'
+        delete_order_form.submit()
+    }
+
+    updateOrderModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        orderId = button.getAttribute('data-id')
+        currentOrder = ordersData.find((order)=> {
+           return order._id == orderId
+        })
+
+        document.getElementById('buyerNameUpdate').value = currentOrder.buyerName
+        document.getElementById('phoneNumberUpdate').value = currentOrder.phoneNumber
+        document.getElementById('addressUpdate').value = currentOrder.address
+        document.getElementById('productUpdate').value = currentOrder.product
+        document.getElementById('quantityUpdate').value = currentOrder.quantity
+        document.getElementById('priceOrderUpdate').value = currentOrder.priceOrder
+        document.getElementById('paymentStatusUpdate').value = currentOrder.paymentStatus
+        document.getElementById('orderStatusUpdate').value = currentOrder.orderStatus
+        
+        const day = String(currentOrder.date).slice(0,2)
+        const month = String(currentOrder.date).slice(3,5)
+        const year = String(currentOrder.date).slice(6,10)
+        document.getElementById('dateUpdate').value = `${year}-${month}-${day}`;
+
+        document.getElementById('productUpdate').value = currentOrder.product.id
+        
+    })
+
+    btn_cf_update_order.onclick = function(){
+        update_order_form.action = '/orders/update/'+orderId+'?_method=PUT'
+        update_order_form.submit()
+    }
+
+
+</script>

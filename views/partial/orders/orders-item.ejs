@@ -1,37 +1,74 @@
 <tr>
     <td class="align-middle text-center">
-        <p class="text-xs font-weight-bold mb-0"><%= i+1 %></p>
+        <p class="text-xs font-weight-bold mb-0">
+            <%= i+1 %>
+        </p>
     </td>
     <td>
         <div class="d-flex px-2 py-1">
             <div>
-                <img src="/productImage/<%= order.product.productImages[0] %>" class="avatar avatar-sm me-3" alt="user1">
+                <img src="/productImage/<%= order.product.productImages[0] %>" class="avatar avatar-sm me-3"
+                    alt="user1">
             </div>
             <div class="d-flex flex-column justify-content-center">
-                <h6 class="mb-0 text-sm"><%= order.buyerName %></h6>
-                <p class="text-xs text-secondary mb-0"><%= order.phoneNumber %></p>
+                <h6 class="mb-0 text-sm">
+                    <%= order.buyerName %>
+                </h6>
+                <p class="text-xs text-secondary mb-0">
+                    <%= order.phoneNumber %>
+                </p>
+                <p style="  white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 200px;" class="text-xs text-secondary mb-0">
+                    Địa chỉ: 
+                    <%= order.address %>
+                </p>
             </div>
         </div>
     </td>
     <td>
-        <p class="text-xs font-weight-bold mb-0"><%= order.product.productName %></p>
-        <p class="text-xs text-secondary mb-0"><%= order.product.color %></p>
+        <p class="text-xs font-weight-bold mb-0">
+            <%= order.product.productName %>
+        </p>
+        <p class="text-xs text-secondary mb-0">
+            <%= order.product.color %>
+        </p>
     </td>
     <td class="align-middle text-center">
-        <span class="text-secondary text-xs font-weight-bold"><%= order.priceOrder %></span>&#160<span class="text-secondary text-xs font-weight-bold">VNĐ</span>
+        <span class="text-secondary text-xs font-weight-bold">
+            <%= order.priceOrder %>
+        </span>&#160<span class="text-secondary text-xs font-weight-bold">VNĐ</span>
     </td>
-<!--    <td class="align-middle text-center text-sm">-->
-<!--        <span class="badge badge-sm bg-gradient-success">paid</span>-->
-<!--    </td>-->
+    <!--    <td class="align-middle text-center text-sm">-->
+    <!--        <span class="badge badge-sm bg-gradient-success">paid</span>-->
+    <!--    </td>-->
     <td class="align-middle text-center text-sm">
-         <span class="badge badge-sm bg-gradient-faded-dark">unpaid</span>
+        <% if(order.paymentStatus==true){ %>
+            <span class="badge badge-sm bg-gradient-success">paid</span>
+            <% }else{ %>
+                <span class="badge badge-sm bg-gradient-faded-dark">unpaid</span>
+                <% } %>
+
     </td>
+    <td class="align-middle text-center text-sm">
+
+        <% if(order.orderStatus==true){ %>
+            <span class="badge badge-sm bg-gradient-success">Success</span>
+            <% }else{ %>
+                <span class="badge badge-sm bg-gradient-faded-dark">Unsuccessful</span>
+                <% } %>
+
+    </td>
+
     <td class="align-middle text-center">
-        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-id="<%= order._id %>" data-toggle="tooltip"
+            data-original-title="Edit user" data-bs-toggle="modal" data-bs-target="#updateOrderModal" data-bs-whatever="@mdo">
             Edit
         </a>
         &#160
-        <a href="javascript:;" class="text-secondary font-weight-bold text-xs text-danger" data-toggle="tooltip" data-original-title="Edit user">
+        <a href="javascript:;" class="text-secondary font-weight-bold text-xs text-danger" data-id="<%= order._id %>" data-toggle="tooltip"
+            data-original-title="Edit user" data-original-title="Edit user" data-bs-toggle="modal" data-bs-target="#deleteOrderModal" data-bs-whatever="@mdo">
             Delete
         </a>
     </td>
