@@ -40,9 +40,10 @@
             <%= order.priceOrder %>
         </span>&#160<span class="text-secondary text-xs font-weight-bold">VNĐ</span>
     </td>
-    <!--    <td class="align-middle text-center text-sm">-->
-    <!--        <span class="badge badge-sm bg-gradient-success">paid</span>-->
-    <!--    </td>-->
+    <td class="align-middle text-center">
+        <span class="text-secondary text-xs font-weight-bold">
+            <%= order.date %>
+    </td>
     <td class="align-middle text-center text-sm">
         <% if(order.paymentStatus==true){ %>
             <span class="badge badge-sm bg-gradient-success">paid</span>

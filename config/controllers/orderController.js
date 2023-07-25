@@ -36,7 +36,7 @@ class OrderController {
         const lsProduct = res.products
         await Order.find()
             .then((orders) => {
-                var lsOrder = orders.map(function (order) {
+                var Orders = orders.map(function (order) {
                     var date = order.date
                     date = date.slice(8, 10) + '/' + date.slice(5, 7) + '/' + date.slice(0, 4)
                     return {
@@ -60,7 +60,7 @@ class OrderController {
                     }
                 })
 
-                console.log(lsOrder);
+                const lsOrder = Orders.reverse()
                 res.render('orders', { title: 'Orders Management', userlogin, lsOrder, lsProduct })
             })
             .catch((error) => {
@@ -207,6 +207,56 @@ class OrderController {
                 return res.redirect('/orders')
             })
             .catch(next)
+    }
+
+    async searchOrder(req, res, next) {
+        const userlogin = req.userlogin
+        const lsProduct = res.products
+        var keyword_search = req.query.keyword_search
+        var keyword_search_number;
+        if (isNaN(keyword_search) == false){
+            keyword_search_number = Number(keyword_search)
+        }
+        var query = Order.where({
+            $or:[
+                {buyerName:{$regex:keyword_search, $options:'i'}},
+                {phoneNumber:{$regex:keyword_search, $options:'i'}},
+                {address:{$regex:keyword_search, $options:'i'}},
+                {priceOrder:{$eq:keyword_search_number}},
+            ]
+        })
+        await Order.find(query)
+            .then((orders) => {
+                var Orders = orders.map(function (order) {
+                    var date = order.date
+                    date = date.slice(8, 10) + '/' + date.slice(5, 7) + '/' + date.slice(0, 4)
+                    return {
+                        _id: order._id,
+                        buyerName: order.buyerName,
+                        phoneNumber: order.phoneNumber,
+                        address: order.address,
+                        product: {
+                            id: order.product.id,
+                            productName: order.product.productName,
+                            color: order.product.color,
+                            memory: order.product.memory,
+                            productImages: order.product.productImages,
+                            price: order.product.price,
+                        },
+                        quantity: order.quantity,
+                        priceOrder: order.priceOrder,
+                        date: date,
+                        paymentStatus: order.paymentStatus,
+                        orderStatus: order.orderStatus,
+                    }
+                })
+
+                const lsOrder = Orders.reverse()
+                res.render('orders', { title: 'Orders Management', userlogin, lsOrder, lsProduct })
+            })
+            .catch((error) => {
+                next(error)
+            })
     }
 }
 

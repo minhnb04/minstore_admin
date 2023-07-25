@@ -4,11 +4,11 @@ const fs = require('fs');
 
 class ProductController {
 
-    async index(req, res){
+    async index(req, res, next){
         const userlogin = req.userlogin
         await Product.find()
             .then((products) => {
-                var lsProduct = products.map(function (product) {
+                var Products = products.map(function (product) {
                     var date = product.lastUpdated
                     date = date.slice(8, 10) + '/' + date.slice(5, 7) + '/' + date.slice(0, 4)
                     return {
@@ -26,7 +26,12 @@ class ProductController {
                         status: product.status,
                     }
                 })
-                var productsJSON = JSON.stringify(lsProduct)
+                var productsJSON = JSON.stringify(Products)
+                const lsProduct = Products.sort((a, b)=> {
+                    const dateA = new Date(a.lastUpdated);
+                    const dateB = new Date(b.lastUpdated);
+                    return dateB - dateA;
+                })
                 res.render('products', { title: 'Products Management',userlogin, lsProduct, productsJSON})
             })
             .catch((error) => {
@@ -183,7 +188,6 @@ class ProductController {
                         status: product.status,
                     }
                 })
-                console.log(lsProduct)
                 var productsJSON = JSON.stringify(lsProduct)
                 res.render('products', { title: 'Products Management',userlogin, lsProduct, productsJSON})
             })

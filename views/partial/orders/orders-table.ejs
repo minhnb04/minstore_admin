@@ -19,13 +19,16 @@
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Price
                         </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date
+                        </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pay
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Status
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Action</th>
+                            Action
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,7 +74,7 @@
                         <option>Choose Product</option>
                         <% lsProduct.forEach((product)=>{ %>
                             <option value="<%= product._id %>" data-price="<%= product.price %>">
-                                <%= product.productName %>
+                                <%= product.productName %> - <%= product.color %>
                             </option>
                             <% }) %>
                     </select>
@@ -97,7 +100,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Payment Status:</label>
-                            <select name="paymentStatus" class="form-select" aria-label="Default select example">
+                            <select name="paymentStatus" id="paymentStatusAdd" onchange="checkPaid('add')" class="form-select" aria-label="Default select example">
                                 <option class="text-danger" value="false" selected>Unpaid</option>
                                 <option class="text-success" value="true">Paid</option>
                             </select>
@@ -105,7 +108,7 @@
 
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Order Status:</label>
-                            <select name="orderStatus" class="form-select me-3" aria-label="Default select example">
+                            <select name="orderStatus" id="orderStatusAdd" onchange="checkPaid('add')" class="form-select me-3" aria-label="Default select example">
                                 <option class="text-danger" value="false" selected>Unsuccessful</option>
                                 <option class="text-success" value="true">Succeeded</option>
                             </select>
@@ -177,7 +180,9 @@
                         aria-label="Default select example">
                         <option selected>Choose Product</option>
                         <% lsProduct.forEach((product)=>{ %>
-                            <option value="<%= product._id %>" data-price="<%= product.price %>"><%= product.productName %></option>
+                            <option value="<%= product._id %>" data-price="<%= product.price %>">
+                                <%= product.productName %> - <%= product.color %>
+                            </option>
                             <% }) %>
                     </select>
 
@@ -204,8 +209,8 @@
                     <div class="d-flex justify-content-between">
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Payment Status:</label>
-                            <select name="paymentStatus" id="paymentStatusUpdate" class="form-select"
-                                aria-label="Default select example">
+                            <select name="paymentStatus" id="paymentStatusUpdate" onchange="checkPaid('update')"
+                                class="form-select" aria-label="Default select example">
                                 <option class="text-danger" value="false" selected>Unpaid</option>
                                 <option class="text-success" value="true">Paid</option>
                             </select>
@@ -213,8 +218,8 @@
 
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Order Status:</label>
-                            <select name="orderStatus" id="orderStatusUpdate" class="form-select me-3"
-                                aria-label="Default select example">
+                            <select name="orderStatus" id="orderStatusUpdate" onchange="checkPaid('update')"
+                                class="form-select me-3" aria-label="Default select example">
                                 <option class="text-danger" value="false" selected>Unsuccessful</option>
                                 <option class="text-success" value="true">Succeeded</option>
                             </select>
@@ -234,7 +239,7 @@
 
 <script>
     //Lấy danh sách product từ server
-    var ordersData = <%- JSON.stringify(lsOrder) %>
+    var ordersData = <% - JSON.stringify(lsOrder) %>
         console.log(ordersData);
 
     var addOrderModal = document.getElementById('addOrderModal')
@@ -252,11 +257,11 @@
 
 
     addOrderModal.addEventListener('show.bs.modal', function (event) {
-        
+
         const today = new Date()
         const year = today.getFullYear()
-        const month = String(today.getMonth()+1).padStart(2,'0')
-        const day = String(today.getDate()).padStart(2,'0')
+        const month = String(today.getMonth() + 1).padStart(2, '0')
+        const day = String(today.getDate()).padStart(2, '0')
 
         // console.log(`${year}-${month}-${day}`)
         document.getElementById('dateAdd').value = `${year}-${month}-${day}`;
@@ -311,17 +316,36 @@
             var productSelect = document.getElementById('productAdd')
             var quantity = document.getElementById('quantityAdd')
             var priceOrder = document.getElementById('priceOrderAdd')
-        }else if(x == 'update'){
+        } else if (x == 'update') {
             var productSelect = document.getElementById('productUpdate')
             var quantity = document.getElementById('quantityUpdate')
             var priceOrder = document.getElementById('priceOrderUpdate')
-        }else{
+        } else {
             console.log('Saiiiiiiii!');
         }
 
         const productPrice = productSelect.options[productSelect.selectedIndex];
         const price = productPrice.getAttribute("data-price");
         priceOrder.value = Number(price) * Number(quantity.value)
+    }
+
+
+    function checkPaid(x) {
+        var paymentStatus;
+        var orderStatus;
+        if (x == "add") {
+            paymentStatus = document.getElementById('paymentStatusAdd')
+            orderStatus = document.getElementById('orderStatusAdd')
+        } else if (x == 'update') {
+            paymentStatus = document.getElementById('paymentStatusUpdate')
+            orderStatus = document.getElementById('orderStatusUpdate')
+        } else {
+            console.log('Saiiiiiiii!');
+        }
+
+        if (paymentStatus.value == 'false') {
+            orderStatus.value = false
+        }
     }
 
 </script>

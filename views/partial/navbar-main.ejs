@@ -136,11 +136,14 @@
         else if (pageName == "Products Management"){
             search_form.action = '/products/search?_method=GET'
             search_form.submit()
-        }else {
+        }
+        else if (pageName == "Orders Management"){
+            search_form.action = '/orders/search?_method=GET'
+            search_form.submit()
+        }
+         else {
             alert("Tìm kiếm ngoài phạm vi!!")
         }
-
-
     }
 
 </script>

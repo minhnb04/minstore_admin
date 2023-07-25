@@ -11,7 +11,9 @@ router.post('/add-order',authController.checkPermissionStaff, orderController.ad
 
 router.put('/update/:id',authController.checkPermissionStaff, orderController.updateOrder);
 
-router.delete('/delete/:id',authController.checkPermissionStaff,  orderController.deleteOrder);
+router.delete('/delete/:id',authController.checkPermissionStaff, orderController.deleteOrder);
+
+router.get('/search', authController.checkPermissionStaff, orderController.getProducts, orderController.searchOrder);
 
 
 module.exports = router;

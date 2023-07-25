@@ -8,7 +8,7 @@ class UserController {
         const userlogin = req.userlogin
         await User.find()
             .then((users) => {
-                var lsUser = users.map(function (user) {
+                var Users = users.map(function (user) {
                     var date = user.birthday
                     date = date.slice(8, 10) + '/' + date.slice(5, 7) + '/' + date.slice(0, 4)
                     return {
@@ -26,7 +26,8 @@ class UserController {
                         status: user.status
                     }
                 })
-                var usersJSON = JSON.stringify(lsUser)
+                var usersJSON = JSON.stringify(Users)
+                const lsUser = Users.reverse()
                 res.render('users', { title: 'User Management',userlogin, lsUser, usersJSON})
             })
             .catch((error) => {
