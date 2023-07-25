@@ -122,7 +122,7 @@ class OrderController {
                     quantity: req.body.quantity,
                     priceOrder: req.body.priceOrder,
                     date: req.body.date,
-                    price: req.body.price,
+                    price: req.body.price, 
                     paymentStatus: req.body.paymentStatus,
                     orderStatus: req.body.orderStatus,
                 })
