@@ -17,7 +17,6 @@ const dashboardRouter = require('./routes/dashboard');
 const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
 const ordersRouter = require('./routes/orders');
-const salesRouter = require('./routes/sales');
 
 const authCilentRouter = require('./routes/client_api/auth_client');
 const productCilentRouter = require('./routes/client_api/product_client');
@@ -51,7 +50,6 @@ app.use('/dashboard',authController.checklogin, dashboardRouter);
 app.use('/users',authController.checklogin, usersRouter);
 app.use('/products',authController.checklogin, productsRouter);
 app.use('/orders',authController.checklogin, ordersRouter);
-app.use('/sales',authController.checklogin, salesRouter);
 
 //Client
 app.use('/authCilent', authCilentRouter);
