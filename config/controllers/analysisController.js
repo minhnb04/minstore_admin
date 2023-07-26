@@ -6,9 +6,12 @@ const Order = require('../../models/order');
 class AnalysisController {
 
     index(req, res, next) {
-        const salesByYear = res.salesByYear;
         const userlogin = req.userlogin
-        res.render('dashboard', { title: 'Dashboard', userlogin, salesByYear });
+        const salesByYear = res.salesByYear
+        const totalMoney = res.totalMoney
+        const todaySales = res.todaySales
+        const newOrders = res.newOrders
+        res.render('dashboard', { title: 'Dashboard', userlogin, salesByYear, totalMoney, todaySales, newOrders});
     }
 
     async getSalesByYear(req, res, next) {
@@ -43,6 +46,39 @@ class AnalysisController {
             });
             return salesByMonth
         })
+
+        var totalMoney = 0
+        salesByYear.forEach(element => {
+            element.forEach(order => {
+                totalMoney += order.priceOrder
+            })
+        });
+        res.totalMoney = totalMoney
+
+        next()
+    } 
+
+    async getSalesByDay(req, res, next){
+        var todaySales = 0
+        var newOrders = 0
+        const today = new Date()
+        const year = today.getFullYear()
+        const month = String(today.getMonth() + 1).padStart(2, '0')
+        const day = String(today.getDate()).padStart(2, '0')
+
+        await Order.find({
+            date: { $regex: `${year}-${month}-${day}` },
+            orderStatus: true
+        }).then((results) => {
+            results.forEach((element, i) => {
+                todaySales += element.priceOrder
+                newOrders += (i+1)
+            });
+        }).catch((error) => {
+            console.error(error);
+        })
+        res.todaySales = todaySales
+        res.newOrders = newOrders
         next()
     }
 
